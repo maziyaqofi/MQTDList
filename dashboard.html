@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MQ TDList - Dashboard</title>
+  <link rel="stylesheet" href="styledashboard.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="dashboard">
+
+    <!-- HEADER (FULL WIDTH) -->
+    <header class="header-dashboard">
+
+    <div class="header-left">
+        <h1 class="logo">MQ TDList</h1>
+    </div>
+
+    <div class="header-center">
+    <div class="search-box">
+        <input type="text" placeholder="Search your task here...">
+        <button class="search-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+    </div>
+
+    <div class="header-right">
+    <button class="notif-btn">
+      <i class="fa-regular fa-bell"></i>
+    </button>
+
+    <div class="date">
+      <p id="day"></p>
+      <span id="fullDate"></span>
+    </div>
+    </div>
+
+    </header>
+
+    <!-- BODY -->
+    <div class="dashboard-body">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+        <ul class="menu">
+            <li>Dashboard</li>
+            <li>Priority Task</li>
+            <li>Calendar</li>
+            <li>All Task</li>
+            <li>Settings</li>
+            <li>Help</li>
+            <li onclick="logout()">Logout</li>
+        </ul>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="main">
+        <div class="content">
+            <h1>Welcome Back 👋</h1>
+
+            <div class="task-input">
+            <input type="text" id="taskInput" placeholder="Add new task...">
+            <button id="addTaskBtn">Add</button>
+            </div>
+
+            <div class="filter">
+            <button>All</button>
+            <button>Active</button>
+            <button>Completed</button>
+            </div>
+
+            <ul id="taskList"></ul>
+        </div>
+        </main>
+
+    </div>
+
+</div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

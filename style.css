@@ -1,0 +1,179 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+}
+
+/* LAYOUT */
+.login-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT */
+.left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #ffffff; */
+}
+
+.left img {
+  width: 80%;
+}
+
+/* RIGHT */
+.right {
+  flex: 1;
+  /* background-color: #fff5e4; */
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  font-size: 60px;
+  font-weight: 700;
+  color: #ef6a85;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.divider {
+  width: 40%;
+  height: 3px;
+  background-color: black;
+}
+
+.subtitle {
+  font-size: 20px;
+  margin-bottom: 25px;
+  margin-top: 5px;
+}
+
+/* FORM */
+.form {
+  width: 100%;
+  max-width: 500px;
+  /* margin: 20px auto 0; */
+  margin-left: 50px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.login-title {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* INPUT GROUP */
+.input-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+/* REMEMBER */
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.remember input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.remember label {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* BUTTON */
+button {
+  width: 40%;
+  padding: 12px;
+  font-weight: 700;
+
+  background-color: #ef6a85;
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e05570;
+}
+
+/* SOCIAL */
+.login-with {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 14px;
+  color: #666;
+  margin-left: 100px;
+}
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-left: 100px;
+}
+
+.social-login button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+/* COLORS */
+.google {
+  background-color: #db4437;
+}
+
+.facebook {
+  background-color: #3b5998;
+}
+
+.twitter {
+  background-color: #1da1f2;
+}
+
+

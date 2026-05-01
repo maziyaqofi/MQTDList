@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+}
+
+/* ===== DASHBOARD ===== */
+* { 
+  margin: 0; padding: 0; 
+  box-sizing: border-box; 
+} 
+
+.dashboard { 
+  display: flex; 
+  flex-direction: column; 
+  height: 100vh; 
+}
+
+/* HEADER */
+.header-dashboard {
+  height: 70px;
+  background-color: #fff6e3;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 60px;
+}
+
+/* LEFT */
+.logo {
+  color: #ef6a85;
+  font-size: 28px;
+}
+
+/* CENTER */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* SEARCH */
+.search-box {
+  width: 500px;
+  height: 40px;
+  display: flex;
+  border: 1px solid #ef6a85;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f8faff;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 18px;
+  background-color: #f8faff;
+  color: #555;
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #9ca0aa;
+  font-weight: 500;
+}
+
+.search-btn {
+  width: 40px;
+  border: none;
+  background-color: #ef6a85;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* RIGHT */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* NOTIF */
+.notif-btn {
+  width: 40px;
+  height: 40px;
+  background: #ef6a85;
+  border: none;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* DATE */
+.date {
+  text-align: left;
+  line-height: 1.2;
+}
+
+.date p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+.date span {
+  display: block;
+  margin-top: 3px;
+  color: #1da1ff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+/* BODY (sidebar + main) */
+.dashboard-body {
+  display: flex;
+  flex: 1;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 230px;
+  background-color: #ef6a85;
+  color: white;
+  padding: 20px;
+}
+
+.menu {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.menu li {
+  margin-bottom: 15px 0;
+  cursor: pointer;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  background-color: #ffffff;
+}
+
+/* CONTENT */
+.content {
+  padding: 30px;
+}
+
+.content h1 {
+  margin-bottom: 20px;
+}
+
+
+button:hover {
+  background-color: #e05570;
+}
