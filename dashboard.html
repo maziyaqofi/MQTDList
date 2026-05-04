@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <div class="dashboard">
+  <div class="dashboard">
 
     <!-- HEADER (FULL WIDTH) -->
     <header class="header-dashboard">
@@ -45,35 +45,57 @@
 
         <!-- SIDEBAR -->
         <aside class="sidebar">
-        <ul class="menu">
-            <li>Dashboard</li>
-            <li>Priority Task</li>
-            <li>Calendar</li>
-            <li>All Task</li>
-            <li>Settings</li>
-            <li>Help</li>
-            <li onclick="logout()">Logout</li>
-        </ul>
+          <div class="profile">
+            <img src="assets/profile.jpg" alt="profile">
+            <h3 id="userName">User</h3>
+            <p id="userEmail">user@example.com</p>
+          </div>
+
+          <ul class="menu">
+            <li class="active"><i class="fa-solid fa-house"></i> Dashboard</li>
+            <li><i class="fa-solid fa-star"></i> Priority Task</li>
+            <li><i class="fa-solid fa-calendar"></i> Calendar</li>
+            <li><i class="fa-solid fa-list"></i> All Task</li>
+            <li><i class="fa-solid fa-gear"></i> Settings</li>
+            <li><i class="fa-solid fa-circle-question"></i> Help</li>
+          </ul>
+
+          <div class="logout" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Logout
+          </div>
         </aside>
 
         <!-- MAIN -->
-        <main class="main">
-        <div class="content">
-            <h1>Welcome Back 👋</h1>
+        <main class="main-content">
+          <section class="task-card" aria-labelledby="welcome-title">
+            <h1 id="welcome-title">Welcome Back, Maziya 💕</h1>
 
-            <div class="task-input">
-            <input type="text" id="taskInput" placeholder="Add new task...">
-            <button id="addTaskBtn">Add</button>
+            <form class="task-form" id="taskForm">
+              <input id="taskInput" type="text" placeholder="Type your task here.." autocomplete="off">
+              <input id="taskDate" type="date" aria-label="Task date">
+
+              <button class="calendar-btn" type="button" id="dateButton" aria-label="Pick date"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2V3a1 1 0 0 1 1-1Zm13 8H4v10h16V10ZM4 8h16V6H4v2Zm4 5h2v2H8v-2Zm4 0h2v2h-2v-2Zm4 0h2v2h-2v-2Zm-8 4h2v2H8v-2Zm4 0h2v2h-2v-2Z" /> </svg> 
+              </button>
+
+              <button class="add-btn" type="submit"><b>+ Add</b></button>
+            </form>
+
+            <div class="task-meta">
+              <div class="filters" aria-label="Task filters">
+                <button class="filter active" type="button" data-filter="all">All</button>
+                <span>|</span>
+                <button class="filter" type="button" data-filter="active">Active</button>
+                <span>|</span>
+                <button class="filter" type="button" data-filter="completed">Completed</button>
+              </div>
+
+              <p id="taskCount">0 tasks left</p>
             </div>
 
-            <div class="filter">
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
-            </div>
+            <ul class="task-list" id="taskList" aria-label="Tasks">
 
-            <ul id="taskList"></ul>
-        </div>
+            </ul>
+          </section>
         </main>
 
     </div>
