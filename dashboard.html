@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MQ TDList - Dashboard</title>
   <link rel="stylesheet" href="styledashboard.css">
 
@@ -20,8 +21,8 @@
 
     <div class="header-center">
     <div class="search-box">
-        <input type="text" placeholder="Search your task here...">
-        <button class="search-btn">
+        <input id="searchInput" type="text" placeholder="Search your task here..." autocomplete="off">
+        <button class="search-btn" type="button" id="searchButton" aria-label="Search task">
         <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </div>
@@ -47,17 +48,17 @@
         <aside class="sidebar">
           <div class="profile">
             <img src="assets/profile.jpg" alt="profile">
-            <h3 id="userName">User</h3>
-            <p id="userEmail">user@example.com</p>
+            <h3 id="userName">Loading...</h3>
+            <p id="userEmail">loading@example.com</p>
           </div>
 
           <ul class="menu">
-            <li class="active"><i class="fa-solid fa-house"></i> Dashboard</li>
-            <li><i class="fa-solid fa-star"></i> Priority Task</li>
-            <li><i class="fa-solid fa-calendar"></i> Calendar</li>
-            <li><i class="fa-solid fa-list"></i> All Task</li>
-            <li><i class="fa-solid fa-gear"></i> Settings</li>
-            <li><i class="fa-solid fa-circle-question"></i> Help</li>
+            <li class="active" data-page="dashboard"><i class="fa-solid fa-house"></i> Dashboard</li>
+            <li data-page="priority"><i class="fa-solid fa-star"></i> Priority Task</li>
+            <li data-page="calendar"><i class="fa-solid fa-calendar"></i> Calendar</li>
+            <li data-page="all-task"><i class="fa-solid fa-list"></i> All Task</li>
+            <li data-page="settings"><i class="fa-solid fa-gear"></i> Settings</li>
+            <li data-page="help"><i class="fa-solid fa-circle-question"></i> Help</li>
           </ul>
 
           <div class="logout" onclick="logout()">
@@ -67,8 +68,8 @@
 
         <!-- MAIN -->
         <main class="main-content">
-          <section class="task-card" aria-labelledby="welcome-title">
-            <h1 id="welcome-title">Welcome Back, Maziya 💕</h1>
+          <section class="task-card page-section active" id="dashboardPage" aria-labelledby="welcome-title">
+            <h1 id="welcome-title">Welcome Back</h1>
 
             <form class="task-form" id="taskForm">
               <input id="taskInput" type="text" placeholder="Type your task here.." autocomplete="off">
@@ -95,6 +96,40 @@
             <ul class="task-list" id="taskList" aria-label="Tasks">
 
             </ul>
+          </section>
+
+          <section class="priority-page page-section" id="priorityPage" aria-labelledby="priority-title">
+            <div class="priority-panel priority-list-panel">
+              <h1 id="priority-title">Priority Tasks</h1>
+
+              <div class="priority-list" id="priorityList" aria-label="Priority tasks">
+
+              </div>
+            </div>
+
+            <article class="priority-panel priority-detail" id="priorityDetail" aria-label="Priority task detail">
+
+            </article>
+          </section>
+
+          <section class="task-card page-section" id="calendarPage">
+            <h1>Calendar</h1>
+            <p class="empty-text">Jadwal task berdasarkan tanggal akan tampil di sini.</p>
+          </section>
+
+          <section class="task-card page-section" id="allTaskPage">
+            <h1>All Task</h1>
+            <p class="empty-text">Semua task kamu akan tampil di sini.</p>
+          </section>
+
+          <section class="task-card page-section" id="settingsPage">
+            <h1>Settings</h1>
+            <p class="empty-text">Pengaturan akun dan aplikasi akan tampil di sini.</p>
+          </section>
+
+          <section class="task-card page-section" id="helpPage">
+            <h1>Help</h1>
+            <p class="empty-text">Panduan penggunaan aplikasi akan tampil di sini.</p>
           </section>
         </main>
 

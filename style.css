@@ -4,10 +4,14 @@ body {
   background-color: #ffffff;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* LAYOUT */
 .login-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* LEFT */
@@ -20,18 +24,19 @@ body {
 }
 
 .left img {
-  width: 80%;
+  width: min(80%, 520px);
 }
 
 /* RIGHT */
 .right {
   flex: 1;
   /* background-color: #fff5e4; */
-  padding: 50px;
+  padding: clamp(28px, 5vw, 50px);
 
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 /* HEADER */
@@ -42,23 +47,25 @@ body {
 }
 
 .logo {
-  font-size: 60px;
+  font-size: clamp(38px, 6vw, 60px);
   font-weight: 700;
   color: #ef6a85;
   margin-bottom: 5px;
   margin-top: 10px;
+  text-align: center;
 }
 
 .divider {
-  width: 40%;
+  width: min(40%, 220px);
   height: 3px;
   background-color: black;
 }
 
 .subtitle {
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
   margin-bottom: 25px;
   margin-top: 5px;
+  text-align: center;
 }
 
 /* FORM */
@@ -66,7 +73,7 @@ body {
   width: 100%;
   max-width: 500px;
   /* margin: 20px auto 0; */
-  margin-left: 50px;
+  margin: 0 auto;
 
   display: flex;
   flex-direction: column;
@@ -122,7 +129,7 @@ body {
 
 /* BUTTON */
 button {
-  width: 40%;
+  width: min(100%, 220px);
   padding: 12px;
   font-weight: 700;
 
@@ -144,14 +151,14 @@ button:hover {
   margin-top: 60px;
   font-size: 14px;
   color: #666;
-  margin-left: 100px;
+  margin-left: 0;
 }
 
 .social-login {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-left: 100px;
+  margin-left: 0;
 }
 
 .social-login button {
@@ -176,4 +183,42 @@ button:hover {
   background-color: #1da1f2;
 }
 
+@media (max-width: 900px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .left {
+    min-height: 260px;
+    padding: 24px;
+  }
+
+  .left img {
+    width: min(70%, 360px);
+  }
+
+  .right {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .left {
+    display: none;
+  }
+
+  .right {
+    min-height: 100vh;
+    padding: 28px 20px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .social-login button {
+    width: 42px;
+    height: 42px;
+  }
+}
 
