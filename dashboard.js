@@ -17,14 +17,20 @@ const userEmailElement = document.getElementById("userEmail");
 const welcomeTitle = document.getElementById("welcome-title");
 const priorityList = document.getElementById("priorityList");
 const priorityDetail = document.getElementById("priorityDetail");
+const calendarMonth = document.getElementById("calendarMonth");
+const calendarGrid = document.getElementById("calendarGrid");
+const prevMonth = document.getElementById("prevMonth");
+const nextMonth = document.getElementById("nextMonth");
 const filterButtons = document.querySelectorAll(".filter");
 const menuItems = document.querySelectorAll(".menu li");
 const pageSections = document.querySelectorAll(".page-section");
 
 const TASK_STORAGE_KEY = "mqTasks";
+const ACTIVE_PAGE_STORAGE_KEY = "mqActivePage";
 
 let activeFilter = "all";
 let searchKeyword = "";
+let calendarViewDate = new Date();
 const defaultTasks = [
   { id: 1, text: "Learn React", date: "", completed: false, priority: false, createdAt: "20/06/2023" },
   { id: 2, text: "Prototyping To-Do List", date: "", completed: true, priority: false, createdAt: "20/06/2023" },
@@ -94,6 +100,14 @@ function getTodayShortDate() {
   });
 }
 
+function getDateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
 function getVisibleTasks() {
   let visibleTasks = tasks;
 
@@ -133,6 +147,10 @@ function showPage(pageName) {
     help: "helpPage",
   };
 
+  if (!pageMap[pageName]) {
+    pageName = "dashboard";
+  }
+
   pageSections.forEach((section) => {
     section.classList.remove("active");
   });
@@ -151,6 +169,8 @@ function showPage(pageName) {
   if (selectedMenu) {
     selectedMenu.classList.add("active");
   }
+
+  localStorage.setItem(ACTIVE_PAGE_STORAGE_KEY, pageName);
 }
 
 function logout() {
@@ -300,8 +320,77 @@ function renderPriorityDetail() {
       renderTasks();
       renderPriorityTasks();
       renderPriorityDetail();
+      renderCalendar();
     }
   });
+}
+
+function renderCalendar() {
+  const year = calendarViewDate.getFullYear();
+  const month = calendarViewDate.getMonth();
+  const monthName = calendarViewDate.toLocaleDateString("en-US", {
+    month: "long",
+  });
+  const weekDays = ["SUN", "MON", "TUE", "WED", "THUR", "FRI", "SAT"];
+  const firstDay = new Date(year, month, 1);
+  const startDay = firstDay.getDay();
+  const lastDay = new Date(year, month + 1, 0).getDate();
+  const prevLastDay = new Date(year, month, 0).getDate();
+  const todayKey = getDateKey(new Date());
+
+  calendarMonth.textContent = `${monthName}, ${year}`;
+  calendarGrid.innerHTML = "";
+
+  weekDays.forEach((day) => {
+    const dayHeader = document.createElement("div");
+    dayHeader.className = "calendar-weekday";
+    dayHeader.textContent = day;
+    calendarGrid.appendChild(dayHeader);
+  });
+
+  for (let index = 0; index < 42; index++) {
+    const dayOffset = index - startDay + 1;
+    let cellDate;
+    let isCurrentMonth = true;
+
+    if (dayOffset < 1) {
+      cellDate = new Date(year, month - 1, prevLastDay + dayOffset);
+      isCurrentMonth = false;
+    } else if (dayOffset > lastDay) {
+      cellDate = new Date(year, month + 1, dayOffset - lastDay);
+      isCurrentMonth = false;
+    } else {
+      cellDate = new Date(year, month, dayOffset);
+    }
+
+    const dateKey = getDateKey(cellDate);
+    const dayTasks = tasks.filter((task) => task.date === dateKey);
+    const cell = document.createElement("div");
+    cell.className = `calendar-day${isCurrentMonth ? "" : " muted"}${dateKey === todayKey ? " today" : ""}${dayTasks.length ? " has-task" : ""}`;
+
+    const visibleTasks = dayTasks.slice(0, 2)
+      .map((task, taskIndex) => `
+        <div class="calendar-task task-color-${taskIndex % 3}${task.completed ? " completed" : ""}">
+          <strong>${escapeHtml(task.text)}</strong>
+          <span>${task.completed ? "Completed" : "Not Started"}</span>
+        </div>
+      `)
+      .join("");
+
+    const extraCount = dayTasks.length > 2
+      ? `<small class="calendar-more">+${dayTasks.length - 2} more</small>`
+      : "";
+
+    cell.innerHTML = `
+      <span class="calendar-day-number">${cellDate.getDate()}</span>
+      <div class="calendar-task-list">
+        ${visibleTasks}
+        ${extraCount}
+      </div>
+    `;
+
+    calendarGrid.appendChild(cell);
+  }
 }
 
 function renderTasks() {
@@ -352,6 +441,7 @@ function renderTasks() {
       renderTasks();
       renderPriorityTasks();
       renderPriorityDetail();
+      renderCalendar();
     });
 
     item.querySelector(".priority-task").addEventListener("click", () => {
@@ -361,6 +451,7 @@ function renderTasks() {
       renderTasks();
       renderPriorityTasks();
       renderPriorityDetail();
+      renderCalendar();
     });
 
     item.querySelector(".edit-task").addEventListener("click", () => {
@@ -372,6 +463,7 @@ function renderTasks() {
         renderTasks();
         renderPriorityTasks();
         renderPriorityDetail();
+        renderCalendar();
       }
     });
 
@@ -381,6 +473,7 @@ function renderTasks() {
       renderTasks();
       renderPriorityTasks();
       renderPriorityDetail();
+      renderCalendar();
     });
 
     taskList.appendChild(item);
@@ -412,6 +505,7 @@ taskForm.addEventListener("submit", (event) => {
   taskDate.value = "";
   taskInput.focus();
   renderTasks();
+  renderCalendar();
 });
 
 dateButton.addEventListener("click", () => {
@@ -433,6 +527,24 @@ searchButton.addEventListener("click", () => {
   renderTasks();
 });
 
+prevMonth.addEventListener("click", () => {
+  calendarViewDate = new Date(
+    calendarViewDate.getFullYear(),
+    calendarViewDate.getMonth() - 1,
+    1
+  );
+  renderCalendar();
+});
+
+nextMonth.addEventListener("click", () => {
+  calendarViewDate = new Date(
+    calendarViewDate.getFullYear(),
+    calendarViewDate.getMonth() + 1,
+    1
+  );
+  renderCalendar();
+});
+
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     filterButtons.forEach((filterButton) => filterButton.classList.remove("active"));
@@ -448,8 +560,12 @@ menuItems.forEach((item) => {
   });
 });
 
+const savedPage = localStorage.getItem(ACTIVE_PAGE_STORAGE_KEY) || "dashboard";
+
 showToday();
 showUserProfile();
 renderTasks();
 renderPriorityTasks();
 renderPriorityDetail();
+renderCalendar();
+showPage(savedPage);

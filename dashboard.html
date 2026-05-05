@@ -112,9 +112,26 @@
             </article>
           </section>
 
-          <section class="task-card page-section" id="calendarPage">
-            <h1>Calendar</h1>
-            <p class="empty-text">Jadwal task berdasarkan tanggal akan tampil di sini.</p>
+          <section class="calendar-page page-section" id="calendarPage" aria-labelledby="calendar-title">
+            <div class="calendar-panel">
+              <div class="calendar-header">
+                <h1 id="calendar-title">Calendar</h1>
+
+                <div class="calendar-month-control">
+                  <button class="calendar-nav-btn" type="button" id="prevMonth" aria-label="Previous month">
+                    <i class="fa-solid fa-chevron-left"></i>
+                  </button>
+                  <h2 id="calendarMonth">May, 2026</h2>
+                  <button class="calendar-nav-btn" type="button" id="nextMonth" aria-label="Next month">
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="calendar-grid" id="calendarGrid" aria-label="Task calendar">
+
+              </div>
+            </div>
           </section>
 
           <section class="task-card page-section" id="allTaskPage">
